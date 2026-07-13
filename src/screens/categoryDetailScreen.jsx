@@ -26,7 +26,7 @@ export default function CategoryDetailScreen() {
       <CategoryPageDecor category={category} theme={theme} />
 
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Header />
+        <Header hideOnScrollMobile />
 
         <div className="flex-1 max-w-[1480px] mx-auto px-5 w-full pb-10">
           {/* Breadcrumb — inline, no separate bar */}

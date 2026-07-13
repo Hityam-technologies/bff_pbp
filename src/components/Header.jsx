@@ -103,15 +103,17 @@ function NavLink({ item, onNavigate, className, children }) {
   );
 }
 
-export default function Header() {
+export default function Header({ hideOnScrollMobile = false }) {
   const navigate = useNavigate();
   const [query, setQuery] = useState('');
   const [shopOpen, setShopOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mobileCatsOpen, setMobileCatsOpen] = useState(false);
+  const [mobileHidden, setMobileHidden] = useState(false);
   const shopRef = useRef(null);
   const searchRef = useRef(null);
+  const lastScrollY = useRef(0);
 
   const suggestions = useMemo(() => searchSuggestions(query, 8), [query]);
   const showSuggestions = searchOpen && query.trim().length > 0;
@@ -137,6 +139,37 @@ export default function Header() {
       document.body.style.overflow = prev;
     };
   }, [drawerOpen]);
+
+  // Mobile: hide header while scrolling down, show again when scrolling up
+  useEffect(() => {
+    if (!hideOnScrollMobile) return undefined;
+
+    lastScrollY.current = window.scrollY;
+
+    const onScroll = () => {
+      if (window.innerWidth >= 768 || drawerOpen) {
+        setMobileHidden(false);
+        lastScrollY.current = window.scrollY;
+        return;
+      }
+
+      const y = window.scrollY;
+      const delta = y - lastScrollY.current;
+
+      if (y < 48) {
+        setMobileHidden(false);
+      } else if (delta > 8) {
+        setMobileHidden(true);
+      } else if (delta < -8) {
+        setMobileHidden(false);
+      }
+
+      lastScrollY.current = y;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [hideOnScrollMobile, drawerOpen]);
 
   const closeDrawer = () => {
     setDrawerOpen(false);
@@ -199,7 +232,11 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white">
+    <header
+      className={`sticky top-0 z-50 bg-white transition-transform duration-300 ease-out will-change-transform ${
+        mobileHidden ? '-translate-y-full md:translate-y-0' : 'translate-y-0'
+      }`}
+    >
       {/* Mobile header — hamburger left, logo center (image 2) */}
       <div className="md:hidden relative w-full h-[104px] flex items-center justify-center px-4 border-b border-[#649e1e]/35">
         <button
