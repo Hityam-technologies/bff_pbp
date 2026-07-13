@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&family=Manrope:wght@200..800&family=Poppins:wght@500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bff-green: #649e1e;
+  --bff-green-light: #a8d65a;
+  --bff-green-dark: #4a7a14;
+  --bff-cream: #fafaf8;
+  --bff-ink: #1a1f16;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bff-cream);
+  font-family: 'Manrope', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  color: var(--bff-ink);
+}
+
+#root {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.font-finger {
+  font-family: 'Finger Paint', cursive;
+}
+
+/* Header / nav — matches clean bold sans from brand site */
+.font-nav {
+  font-family: 'Poppins', system-ui, sans-serif;
+}
+
+/* Subtle grain texture for hero sections */
+.bff-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* Fade-in animation for cards */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out both;
+}
+
+.animate-fade-up-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.animate-fade-up-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.animate-fade-up-delay-3 {
+  animation-delay: 0.24s;
+}
+
+.animate-fade-up-delay-4 {
+  animation-delay: 0.32s;
+}
+
+/* Category hero blob drift */
+@keyframes blobDrift {
+  0%, 100% {
+    transform: translate(-4rem, -4rem) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-3rem, -5rem) rotate(6deg) scale(1.05);
+  }
+}
+
+@keyframes blobDriftReverse {
+  0%, 100% {
+    transform: translate(5rem, 5rem) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(4rem, 6rem) rotate(-5deg) scale(1.06);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes floatReverse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg);
+  }
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: translate(25%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: translate(25%, -50%) scale(1.1);
+  }
+}
+
+/* Growth section — Better Food Factory snack motion */
+@keyframes pouchBob {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+}
+
+@keyframes pouchBobAlt {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(2.5deg);
+  }
+}
+
+@keyframes snackOrbit {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(6px, -12px) rotate(12deg);
+  }
+}
+
+@keyframes snackOrbitAlt {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-8px, -10px) rotate(-10deg);
+  }
+}
+
+@keyframes shelfRise {
+  0%, 100% {
+    transform: translateY(6px);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+@keyframes tagPop {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.08) translateY(-4px);
+  }
+}
+
+@keyframes sparkleBff {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.animate-pouch-1 {
+  transform-origin: center bottom;
+  animation: pouchBob 3.2s ease-in-out infinite;
+}
+
+.animate-pouch-2 {
+  transform-origin: center bottom;
+  animation: pouchBobAlt 3.6s ease-in-out 0.2s infinite;
+}
+
+.animate-pouch-3 {
+  transform-origin: center bottom;
+  animation: pouchBob 3.4s ease-in-out 0.45s infinite;
+}
+
+.animate-snack-orbit {
+  animation: snackOrbit 3s ease-in-out infinite;
+}
+
+.animate-snack-orbit-alt {
+  animation: snackOrbitAlt 3.4s ease-in-out 0.3s infinite;
+}
+
+.animate-shelf-rise {
+  animation: shelfRise 2.8s ease-in-out infinite;
+}
+
+.animate-tag-pop {
+  animation: tagPop 2.5s ease-in-out infinite;
+}
+
+.animate-sparkle-bff {
+  animation: sparkleBff 2.2s ease-in-out infinite;
+}
+
+.animate-blob-drift {
+  animation: blobDrift 8s ease-in-out infinite;
+}
+
+.animate-blob-drift-reverse {
+  animation: blobDriftReverse 9s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: floatReverse 5s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spinSlow 24s linear infinite;
+}
+
+.animate-sparkle {
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.category-variant-pill:hover {
+  background-color: var(--pill-accent);
+  border-color: var(--pill-accent);
+  color: #fff;
+}
+
+.category-stat-tile {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.category-stat-tile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--tile-accent) 18%, transparent);
+}
+
+.category-variant-chip:hover {
+  background-color: var(--chip-accent);
+  border-color: var(--chip-accent);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--chip-accent) 25%, transparent);
+}
+
+.category-variant-chip:hover span {
+  background-color: #fff !important;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 158, 30, 0.2);
+  border-radius: 10px;
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 158, 30, 0.4);
+}
+
+/* Pricing table highlight */
+.pricing-cell-active {
+  background: linear-gradient(135deg, #f0f7e6 0%, #ffffff 100%);
+  border: 1px solid rgba(100, 158, 30, 0.15);
+}
+
+/* Product poster shine effect */
+.product-poster-shine {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.25) 0%, transparent 50%, rgba(0, 0, 0, 0.08) 100%);
+}
+
+/* Product sheet hover lift */
+.product-sheet {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Smooth scroll for anchor links */
+html {
+  scroll-behavior: smooth;
+}
