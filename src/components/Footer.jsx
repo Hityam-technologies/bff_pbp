@@ -34,7 +34,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="mt-auto bg-[#67003f] text-white">
+    <footer id="about" className="mt-auto bg-[#67003f] text-white scroll-mt-[116px] sm:scroll-mt-[120px]">
       <div className="max-w-[1480px] mx-auto px-5 sm:px-6 lg:px-8 py-8 md:py-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-x-10 lg:gap-x-16 items-start">
           <div className="flex flex-col">

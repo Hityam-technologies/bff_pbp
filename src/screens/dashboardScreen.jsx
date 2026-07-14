@@ -88,19 +88,20 @@ export default function DashboardScreen() {
                 <div className="relative max-w-[1480px] mx-auto w-full px-5 sm:px-6 pt-10 pb-10 md:pt-14 md:pb-12">
                     {/* Welcome */}
                     <div className="w-full animate-fade-up">
-                        <h1 className="tracking-tight">
+                        <h1 className="tracking-tight text-left">
+                            {/* Finger Paint has uneven side bearings — slightly inset + fluid size so it stays aligned on mobile */}
                             <span
-                                className="block font-['Finger_Paint'] text-[4.5rem] sm:text-[6rem] md:text-[7.5rem] text-[#649e1e] leading-[1.02]"
-                                style={{ WebkitTextStroke: '0.6px #649e1e', paintOrder: 'stroke fill' }}
+                                className="block font-['Finger_Paint'] text-[clamp(3.25rem,14vw,4.75rem)] sm:text-[6rem] md:text-[7.5rem] text-[#649e1e] leading-[1.05] max-w-full whitespace-nowrap pl-2 sm:pl-1 md:pl-[0.04em]"
+                                style={{ WebkitTextStroke: '0.5px #649e1e', paintOrder: 'stroke fill' }}
                             >
                                 Welcome,
                             </span>
-                            <span className="mt-3 block text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl font-black text-[#1a1f16] leading-[1.08] tracking-tight">
+                            <span className="mt-2 sm:mt-3 block text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl font-black text-[#1a1f16] leading-[1.08] tracking-tight">
                                 product breakdown platform
                             </span>
                         </h1>
 
-                        <div className="mt-5 w-full space-y-1 text-lg sm:text-xl font-medium text-[#1a1f16]/65 leading-relaxed">
+                        <div className="mt-5 w-full space-y-1 text-base sm:text-xl font-medium text-[#1a1f16]/65 leading-relaxed">
                             <p>
                                 Costing & landing prices for every snack, pack, and variant — ready when you are.
                             </p>
@@ -185,7 +186,7 @@ export default function DashboardScreen() {
             </section>
 
             {/* Categories Grid */}
-            <main id="categories" className="relative w-full flex-1 scroll-mt-[110px] sm:scroll-mt-[120px] bg-[#fafaf8]">
+            <main id="categories" className="relative w-full flex-1 scroll-mt-[116px] sm:scroll-mt-[120px] bg-[#fafaf8]">
                 <div className="max-w-[1480px] mx-auto w-full px-5 sm:px-6 py-14">
                     <div className="mb-10">
                         <h2 className="text-3xl md:text-4xl font-black text-stone-900">Product Categories</h2>
@@ -260,7 +261,7 @@ export default function DashboardScreen() {
 
                 {/* Client pains + CTA */}
                 <div className="max-w-[1480px] mx-auto w-full px-5 sm:px-6 pb-14">
-                    <section id="about" className="mt-10 scroll-mt-[110px] sm:scroll-mt-[120px]">
+                    <section className="mt-10">
                         <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-black text-[#1a1f16] tracking-tight uppercase mb-8 md:mb-10">
                             It&apos;s not just{' '}
                             <span className="font-['Finger_Paint'] normal-case text-[#67003f] tracking-normal">
