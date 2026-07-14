@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import { initialProducts } from '../data/products';
@@ -231,10 +232,166 @@ export default function Header({ hideOnScrollMobile = false }) {
     }
   };
 
+  const mobileDrawer = (
+      <div
+        className={`md:hidden fixed inset-0 z-[100] ${drawerOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
+        aria-hidden={!drawerOpen}
+      >
+        <button
+          type="button"
+          className={`absolute inset-0 bg-black/35 transition-opacity duration-300 ${drawerOpen ? 'opacity-100' : 'opacity-0'}`}
+          aria-label="Close menu"
+          onClick={closeDrawer}
+        />
+
+        <aside
+          className={`absolute top-0 left-0 h-full w-[min(86vw,320px)] max-w-full bg-white shadow-[8px_0_40px_rgba(0,0,0,0.12)] flex flex-col transition-transform duration-300 ease-out ${
+            drawerOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+        >
+          <div className="flex items-center justify-between px-5 h-[72px] border-b border-[#649e1e]/25 shrink-0">
+            <p className="font-nav text-sm font-bold uppercase tracking-[0.18em] text-[#67003f]">Menu</p>
+            <button
+              type="button"
+              onClick={closeDrawer}
+              className="p-1.5 text-black hover:text-[#649e1e] transition-colors"
+              aria-label="Close menu"
+            >
+              <CloseIcon className="w-5 h-5" />
+            </button>
+          </div>
+
+          <div className="px-5 pt-4 pb-3 border-b border-stone-100 shrink-0">
+            <form onSubmit={handleMobileSearch} className="relative">
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSearchOpen(true);
+                }}
+                onFocus={() => setSearchOpen(true)}
+                placeholder="Search for products..."
+                className="w-full h-11 pl-4 pr-11 rounded-full border border-stone-200 bg-white font-nav text-[15px] text-stone-800 placeholder:text-stone-400 outline-none focus:border-[#649e1e] focus:ring-2 focus:ring-[#649e1e]/20 transition-shadow"
+                autoComplete="off"
+                aria-label="Search products"
+              />
+              <button
+                type="submit"
+                aria-label="Search products"
+                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-700 hover:text-[#649e1e] transition-colors"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5" aria-hidden="true">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
+                </svg>
+              </button>
+            </form>
+
+            {showSuggestions && (
+              <div className="mt-2 rounded-xl border border-stone-200 bg-white overflow-hidden">
+                {suggestions.length === 0 ? (
+                  <p className="px-3 py-3 font-nav text-sm text-stone-400">
+                    No products found for &ldquo;{query.trim()}&rdquo;
+                  </p>
+                ) : (
+                  <ul className="max-h-[220px] overflow-y-auto py-1 custom-scrollbar" role="listbox">
+                    {suggestions.map((item) => (
+                      <li key={`mobile-${item.type}-${item.id}`}>
+                        <button
+                          type="button"
+                          role="option"
+                          onClick={() => goToSuggestionAndClose(item)}
+                          className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-stone-50 transition-colors"
+                        >
+                          <SuggestionThumb item={item} />
+                          <div className="min-w-0 flex-1">
+                            <p className="font-nav text-[13px] font-semibold text-stone-900 truncate">{item.title}</p>
+                            <p className="font-nav text-[11px] text-stone-400 mt-0.5">{item.subtitle}</p>
+                          </div>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </div>
+
+          <nav className="flex-1 overflow-y-auto px-5 pt-0 pb-2">
+            {MOBILE_NAV_ITEMS.map((item) => {
+              if (item.dropdown) {
+                return (
+                  <div key={item.label} className="border-b border-stone-100">
+                    <button
+                      type="button"
+                      onClick={() => setMobileCatsOpen((o) => !o)}
+                      className={`${drawerLinkClass} border-b-0 justify-between`}
+                      aria-expanded={mobileCatsOpen}
+                    >
+                      {item.label}
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${mobileCatsOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    {mobileCatsOpen && (
+                      <div className="pb-3 pl-1 flex flex-col gap-1">
+                        <button
+                          type="button"
+                          onClick={() => handleNav('/#categories')}
+                          className="text-left font-nav text-[14px] font-medium text-stone-500 hover:text-[#649e1e] py-2 px-2 rounded-lg hover:bg-stone-50"
+                        >
+                          All categories
+                        </button>
+                        {categories.map((category) => (
+                          <button
+                            key={category}
+                            type="button"
+                            onClick={() => {
+                              closeDrawer();
+                              navigate(categoryPath(category));
+                            }}
+                            className="text-left font-nav text-[15px] font-semibold text-[#1a1f16] hover:text-[#649e1e] py-2 px-2 rounded-lg hover:bg-stone-50"
+                          >
+                            {category}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              return (
+                <NavLink
+                  key={item.label}
+                  item={item}
+                  onNavigate={handleNav}
+                  className={drawerLinkClass}
+                />
+              );
+            })}
+          </nav>
+
+          <div className="px-5 py-5 border-t border-stone-100 shrink-0">
+            <a
+              href="tel:+918341234440"
+              className="flex items-center justify-center w-full h-11 rounded-full bg-[#67003f] text-white font-nav text-sm font-bold hover:bg-[#520032] transition-colors"
+            >
+              Call +91 83412 34440
+            </a>
+          </div>
+        </aside>
+      </div>
+  );
+
   return (
+    <>
     <header
-      className={`sticky top-0 z-50 bg-white transition-transform duration-300 ease-out will-change-transform ${
-        mobileHidden ? '-translate-y-full md:translate-y-0' : 'translate-y-0'
+      className={`sticky top-0 z-50 bg-white transition-transform duration-300 ease-out ${
+        mobileHidden ? '-translate-y-full md:translate-y-0 will-change-transform' : ''
       }`}
     >
       {/* Mobile header — hamburger left, logo center (image 2) */}
@@ -420,159 +577,8 @@ export default function Header({ hideOnScrollMobile = false }) {
         </div>
       </div>
 
-      {/* Mobile left drawer */}
-      <div
-        className={`md:hidden fixed inset-0 z-[60] transition-visibility ${drawerOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
-        aria-hidden={!drawerOpen}
-      >
-        <button
-          type="button"
-          className={`absolute inset-0 bg-black/35 transition-opacity duration-300 ${drawerOpen ? 'opacity-100' : 'opacity-0'}`}
-          aria-label="Close menu"
-          onClick={closeDrawer}
-        />
-
-        <aside
-          className={`absolute top-0 left-0 h-full w-[min(86vw,320px)] bg-white shadow-[8px_0_40px_rgba(0,0,0,0.12)] flex flex-col transition-transform duration-300 ease-out ${
-            drawerOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation menu"
-        >
-          <div className="flex items-center justify-between px-5 h-[72px] border-b border-[#649e1e]/25 shrink-0">
-            <p className="font-nav text-sm font-bold uppercase tracking-[0.18em] text-[#67003f]">Menu</p>
-            <button
-              type="button"
-              onClick={closeDrawer}
-              className="p-1.5 text-black hover:text-[#649e1e] transition-colors"
-              aria-label="Close menu"
-            >
-              <CloseIcon className="w-5 h-5" />
-            </button>
-          </div>
-
-          <div className="px-5 pt-4 pb-3 border-b border-stone-100 shrink-0">
-            <form onSubmit={handleMobileSearch} className="relative">
-              <input
-                type="search"
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setSearchOpen(true);
-                }}
-                onFocus={() => setSearchOpen(true)}
-                placeholder="Search for products..."
-                className="w-full h-11 pl-4 pr-11 rounded-full border border-stone-200 bg-white font-nav text-[15px] text-stone-800 placeholder:text-stone-400 outline-none focus:border-[#649e1e] focus:ring-2 focus:ring-[#649e1e]/20 transition-shadow"
-                autoComplete="off"
-                aria-label="Search products"
-              />
-              <button
-                type="submit"
-                aria-label="Search products"
-                className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-700 hover:text-[#649e1e] transition-colors"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5" aria-hidden="true">
-                  <circle cx="11" cy="11" r="7" />
-                  <path d="M20 20l-3.5-3.5" strokeLinecap="round" />
-                </svg>
-              </button>
-            </form>
-
-            {showSuggestions && (
-              <div className="mt-2 rounded-xl border border-stone-200 bg-white overflow-hidden">
-                {suggestions.length === 0 ? (
-                  <p className="px-3 py-3 font-nav text-sm text-stone-400">
-                    No products found for &ldquo;{query.trim()}&rdquo;
-                  </p>
-                ) : (
-                  <ul className="max-h-[220px] overflow-y-auto py-1 custom-scrollbar" role="listbox">
-                    {suggestions.map((item) => (
-                      <li key={`mobile-${item.type}-${item.id}`}>
-                        <button
-                          type="button"
-                          role="option"
-                          onClick={() => goToSuggestionAndClose(item)}
-                          className="w-full flex items-center gap-3 px-3 py-2 text-left hover:bg-stone-50 transition-colors"
-                        >
-                          <SuggestionThumb item={item} />
-                          <div className="min-w-0 flex-1">
-                            <p className="font-nav text-[13px] font-semibold text-stone-900 truncate">{item.title}</p>
-                            <p className="font-nav text-[11px] text-stone-400 mt-0.5">{item.subtitle}</p>
-                          </div>
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            )}
-          </div>
-
-          <nav className="flex-1 overflow-y-auto px-5 pt-0 pb-2">
-            {MOBILE_NAV_ITEMS.map((item) => {
-              if (item.dropdown) {
-                return (
-                  <div key={item.label} className="border-b border-stone-100">
-                    <button
-                      type="button"
-                      onClick={() => setMobileCatsOpen((o) => !o)}
-                      className={`${drawerLinkClass} border-b-0 justify-between`}
-                      aria-expanded={mobileCatsOpen}
-                    >
-                      {item.label}
-                      <ChevronDown className={`w-3.5 h-3.5 transition-transform ${mobileCatsOpen ? 'rotate-180' : ''}`} />
-                    </button>
-
-                    {mobileCatsOpen && (
-                      <div className="pb-3 pl-1 flex flex-col gap-1">
-                        <button
-                          type="button"
-                          onClick={() => handleNav('/#categories')}
-                          className="text-left font-nav text-[14px] font-medium text-stone-500 hover:text-[#649e1e] py-2 px-2 rounded-lg hover:bg-stone-50"
-                        >
-                          All categories
-                        </button>
-                        {categories.map((category) => (
-                          <button
-                            key={category}
-                            type="button"
-                            onClick={() => {
-                              closeDrawer();
-                              navigate(categoryPath(category));
-                            }}
-                            className="text-left font-nav text-[15px] font-semibold text-[#1a1f16] hover:text-[#649e1e] py-2 px-2 rounded-lg hover:bg-stone-50"
-                          >
-                            {category}
-                          </button>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                );
-              }
-
-              return (
-                <NavLink
-                  key={item.label}
-                  item={item}
-                  onNavigate={handleNav}
-                  className={drawerLinkClass}
-                />
-              );
-            })}
-          </nav>
-
-          <div className="px-5 py-5 border-t border-stone-100">
-            <a
-              href="tel:+918341234440"
-              className="flex items-center justify-center w-full h-11 rounded-full bg-[#67003f] text-white font-nav text-sm font-bold hover:bg-[#520032] transition-colors"
-            >
-              Call +91 83412 34440
-            </a>
-          </div>
-        </aside>
-      </div>
     </header>
+    {typeof document !== 'undefined' && createPortal(mobileDrawer, document.body)}
+    </>
   );
 }
