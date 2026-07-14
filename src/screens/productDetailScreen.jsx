@@ -147,7 +147,7 @@ function ProductDetailContent({ product, navigate }) {
               )}
 
               <div
-                className={`relative flex-1 w-full min-w-0 aspect-square overflow-hidden border border-stone-200 ${
+                className={`group/gallery relative flex-1 w-full min-w-0 aspect-square overflow-hidden border border-stone-200 ${
                   hasImages ? 'bg-[#f7f7f5]' : `${product.themeColor}`
                 }`}
               >
@@ -167,7 +167,7 @@ function ProductDetailContent({ product, navigate }) {
                         <button
                           type="button"
                           onClick={goPrev}
-                          className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black text-white flex items-center justify-center shadow-md hover:bg-stone-800 transition-colors"
+                          className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black text-white flex items-center justify-center shadow-md opacity-0 pointer-events-none group-hover/gallery:opacity-100 group-hover/gallery:pointer-events-auto focus-visible:opacity-100 focus-visible:pointer-events-auto hover:bg-stone-800 transition-all duration-200"
                           aria-label="Previous image"
                         >
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -177,7 +177,7 @@ function ProductDetailContent({ product, navigate }) {
                         <button
                           type="button"
                           onClick={goNext}
-                          className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black text-white flex items-center justify-center shadow-md hover:bg-stone-800 transition-colors"
+                          className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black text-white flex items-center justify-center shadow-md opacity-0 pointer-events-none group-hover/gallery:opacity-100 group-hover/gallery:pointer-events-auto focus-visible:opacity-100 focus-visible:pointer-events-auto hover:bg-stone-800 transition-all duration-200"
                           aria-label="Next image"
                         >
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
