@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -11,6 +12,13 @@ export default function CategoryDetailScreen() {
   const { categorySlug } = useParams();
   const navigate = useNavigate();
   const category = findCategoryBySlug(categorySlug);
+
+  // Always open category pages from the top
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }, [categorySlug]);
 
   if (!category) {
     return <Navigate to="/" replace />;

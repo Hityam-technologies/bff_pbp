@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&family=Manrope:wght@200..800&family=Poppins:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Finger+Paint&family=Manrope:wght@200..800&family=Poppins:wght@500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -31,6 +31,13 @@ body {
 /* Header / nav — matches clean bold sans from brand site */
 .font-nav {
   font-family: 'Poppins', system-ui, sans-serif;
+}
+
+/* Product detail body copy — matches betterfoodfactory.in (DM Sans) */
+.font-product-body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 /* Subtle grain texture for hero sections */

@@ -117,18 +117,17 @@ export default function ProductSheet({ product, sizes, index, reverse = false, o
             })}
           </div>
 
-          <div className="mt-5 flex flex-col gap-3">
-            {product.websiteUrl && (
-              <a
-                href={product.websiteUrl}
-                target="_blank"
-                rel="noreferrer"
+          {onViewDetails && (
+            <div className="mt-5">
+              <button
+                type="button"
+                onClick={onViewDetails}
                 className="w-full flex items-center justify-center gap-2 h-11 rounded-full bg-stone-900 text-white text-[13px] font-bold hover:bg-stone-800 transition-colors"
               >
-                View on Website →
-              </a>
-            )}
-          </div>
+                Get Details →
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </article>
