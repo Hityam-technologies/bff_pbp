@@ -5,29 +5,30 @@ const CDN = 'https://cdn.shopify.com/s/files/1/0649/0416/7622/files';
 export const initialProducts = [
   // Trail Mix — no store photos yet; UI falls back to color poster
   { id: 1, category: 'Trail Mix', name: 'Trail Mix', variant: 'Peri Peri',
-    pricing: { '28g': [50, 30], '100g': ['-', '-'], '150g': [260, 156], '500g': [510, 850], '1000g': [900, 1500] },
+    // pricing: [Costing/serving, Landing cost Mumbai]
+    pricing: { '28g': [50, 30], '100g': ['-', '-'], '150g': [260, 156], '500g': [850, 510], '1000g': [1500, 900] },
     cartonQty: 24, shelfLife: 6, gst: 5, themeColor: 'bg-yellow-400', textColor: 'text-yellow-900',
     sellingPrice: 260, websiteUrl: STORE_URL,
   },
   { id: 2, category: 'Trail Mix', name: 'Trail Mix', variant: 'Korean Chilli',
-    pricing: { '28g': [50, 30], '100g': ['-', '-'], '150g': [260, 156], '500g': [510, 850], '1000g': [900, 1500] },
+    pricing: { '28g': [50, 30], '100g': ['-', '-'], '150g': [260, 156], '500g': [850, 510], '1000g': [1500, 900] },
     cartonQty: 24, shelfLife: 6, gst: 5, themeColor: 'bg-red-500', textColor: 'text-red-950',
     sellingPrice: 260, websiteUrl: STORE_URL,
   },
   { id: 3, category: 'Trail Mix', name: 'Trail Mix', variant: 'Katta Meeta',
-    pricing: { '28g': [50, 30], '100g': ['-', '-'], '150g': [260, 156], '500g': [510, 850], '1000g': [900, 1500] },
+    pricing: { '28g': [50, 30], '100g': ['-', '-'], '150g': [260, 156], '500g': [850, 510], '1000g': [1500, 900] },
     cartonQty: 24, shelfLife: 6, gst: 5, themeColor: 'bg-orange-400', textColor: 'text-orange-950',
     sellingPrice: 260, websiteUrl: STORE_URL,
   },
   // Seed Mix — no store photos yet; UI falls back to color poster
   { id: 4, category: 'Seed Mix', name: 'Seed Mix', variant: 'Roasted',
-    pricing: { '28g': [45, 27], '100g': ['-', '-'], '150g': [210, 126], '500g': [420, 700], '1000g': [810, 1350] },
+    pricing: { '28g': [45, 27], '100g': ['-', '-'], '150g': [210, 126], '500g': [700, 420], '1000g': [1350, 810] },
     cartonQty: 24, shelfLife: 6, gst: 5, themeColor: 'bg-amber-400', textColor: 'text-amber-950',
     sellingPrice: 210, websiteUrl: STORE_URL,
   },
   // Edamame
   { id: 5, category: 'Edamame', name: 'Edamame', variant: 'Peri Peri',
-    pricing: { '28g': [50, 30], '100g': [210, 126], '150g': ['-', '-'], '500g': [588, 980], '1000g': [1140, 1900] },
+    pricing: { '28g': [50, 30], '100g': [210, 126], '150g': ['-', '-'], '500g': [980, 588], '1000g': [1900, 1140] },
     cartonQty: 24, shelfLife: 6, gst: 5, themeColor: 'bg-yellow-400', textColor: 'text-yellow-900',
     sellingPrice: 210, websiteUrl: `${STORE_URL}/products/edamame-seeds-peri-peri-flavour`,
     images: [
@@ -36,7 +37,7 @@ export const initialProducts = [
     ],
   },
   { id: 6, category: 'Edamame', name: 'Edamame', variant: 'Korean Chilli',
-    pricing: { '28g': [50, 30], '100g': [210, 126], '150g': ['-', '-'], '500g': [588, 980], '1000g': [1140, 1900] },
+    pricing: { '28g': [50, 30], '100g': [210, 126], '150g': ['-', '-'], '500g': [980, 588], '1000g': [1900, 1140] },
     cartonQty: 24, shelfLife: 6, gst: 5, themeColor: 'bg-red-500', textColor: 'text-red-950',
     sellingPrice: 210, websiteUrl: `${STORE_URL}/products/edamame-seeds-koreanchilli-flavour`,
     images: [
@@ -45,7 +46,7 @@ export const initialProducts = [
     ],
   },
   { id: 7, category: 'Edamame', name: 'Edamame', variant: 'Katta Meeta',
-    pricing: { '28g': [50, 30], '100g': [210, 126], '150g': ['-', '-'], '500g': [588, 980], '1000g': [1140, 1900] },
+    pricing: { '28g': [50, 30], '100g': [210, 126], '150g': ['-', '-'], '500g': [980, 588], '1000g': [1900, 1140] },
     cartonQty: 24, shelfLife: 6, gst: 5, themeColor: 'bg-green-500', textColor: 'text-green-950',
     sellingPrice: 210, websiteUrl: `${STORE_URL}/products/edamame-seeds-khattameeta-flavour`,
     images: [
