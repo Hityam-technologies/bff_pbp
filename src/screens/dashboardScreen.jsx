@@ -6,29 +6,6 @@ import { categoryMeta, categoryThemes } from '../data/categoryThemes';
 import { categoryPath } from '../utils/navigation';
 import partnersImage from '../assets/About_us_image_1080x.webp';
 
-const clientPains = [
-    {
-        icon: '📋',
-        title: 'Quotes stall when numbers aren’t clear',
-        accent: '#f37500',
-    },
-    {
-        icon: '📉',
-        title: 'Margins get lost in spreadsheet chaos',
-        accent: '#649e1e',
-    },
-    {
-        icon: '📦',
-        title: 'Pack sizes don’t match what buyers need',
-        accent: '#67003f',
-    },
-    {
-        icon: '⏳',
-        title: 'You close the deal… then chase the landing price',
-        accent: '#f37500',
-    },
-];
-
 const growthPoints = [
     { title: 'Price with confidence', accent: '#649e1e' },
     { title: 'Move products faster', accent: '#f37500' },
@@ -187,7 +164,7 @@ export default function DashboardScreen() {
 
             {/* Categories Grid */}
             <main id="categories" className="relative w-full flex-1 scroll-mt-[116px] sm:scroll-mt-[120px] bg-[#fafaf8]">
-                <div className="max-w-[1480px] mx-auto w-full px-5 sm:px-6 py-14">
+                <div className="max-w-[1480px] mx-auto w-full px-5 sm:px-6 pt-14 pb-8 md:pb-10">
                     <div className="mb-10">
                         <h2 className="text-3xl md:text-4xl font-black text-stone-900">Product Categories</h2>
                         <p className="text-stone-500 font-medium mt-2">Select a category to view pricing breakdown.</p>
@@ -257,44 +234,9 @@ export default function DashboardScreen() {
                             );
                         })}
                     </div>
-                </div>
 
-                {/* Client pains + CTA */}
-                <div className="max-w-[1480px] mx-auto w-full px-5 sm:px-6 pb-14">
-                    <section className="mt-10">
-                        <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-black text-[#1a1f16] tracking-tight uppercase mb-8 md:mb-10">
-                            It&apos;s not just{' '}
-                            <span className="font-['Finger_Paint'] normal-case text-[#67003f] tracking-normal">
-                                &ldquo;busy work&rdquo;
-                            </span>
-                        </h2>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 max-w-5xl mx-auto">
-                            {clientPains.map((pain) => (
-                                <div
-                                    key={pain.title}
-                                    className="flex items-center gap-4 rounded-[2rem] bg-white px-5 py-4 shadow-[0_6px_24px_rgba(26,31,22,0.06)] border border-[#1a1f16]/[0.04]"
-                                >
-                                    <span
-                                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-xl"
-                                        style={{ backgroundColor: `${pain.accent}22` }}
-                                        aria-hidden="true"
-                                    >
-                                        {pain.icon}
-                                    </span>
-                                    <p className="text-[15px] sm:text-base font-bold text-[#1a1f16] leading-snug tracking-tight">
-                                        {pain.title}
-                                    </p>
-                                </div>
-                            ))}
-                        </div>
-
-                        <p className="mt-8 text-center text-sm sm:text-base font-medium text-[#1a1f16]/50 max-w-xl mx-auto leading-relaxed">
-                            This platform gives partners costing, landing, and pack-wise clarity — so every quote moves faster.
-                        </p>
-                    </section>
-
-                    <div className="mt-14 rounded-2xl bg-stone-900 text-white p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                    {/* CTA */}
+                    <div className="mt-8 rounded-2xl bg-stone-900 text-white p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 md:gap-6">
                         <div>
                             <h3 className="text-xl font-black mb-1">Need a custom quote?</h3>
                             <p className="text-white/60 text-sm">Bulk orders, distributor pricing, and corporate gifting.</p>

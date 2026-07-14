@@ -8,6 +8,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Better Food Factory | Client Product Breakdown</title>
+    <!-- Reload should stay at top; leftover #about from About Us must not jump to footer -->
+    <script>
+      (function () {
+        try {
+          if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+          var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+          if (nav && nav.type === 'reload' && location.hash) {
+            history.replaceState(null, '', location.pathname + location.search);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
