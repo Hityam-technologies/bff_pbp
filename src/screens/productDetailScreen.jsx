@@ -92,7 +92,7 @@ function ProductDetailContent({ product, navigate }) {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Header />
+      <Header hideOnScrollMobile />
 
       <div className="bg-white border-b border-stone-100">
         <div className="max-w-[1400px] mx-auto px-5 py-3">

@@ -114,6 +114,7 @@ export default function Header({ hideOnScrollMobile = false }) {
   const [mobileHidden, setMobileHidden] = useState(false);
   const shopRef = useRef(null);
   const searchRef = useRef(null);
+  const mobileSearchRef = useRef(null);
   const lastScrollY = useRef(0);
 
   const suggestions = useMemo(() => searchSuggestions(query, 8), [query]);
@@ -124,7 +125,10 @@ export default function Header({ hideOnScrollMobile = false }) {
       if (shopRef.current && !shopRef.current.contains(e.target)) {
         setShopOpen(false);
       }
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
+      const clickedDesktopSearch = searchRef.current?.contains(e.target);
+      const clickedMobileSearch = mobileSearchRef.current?.contains(e.target);
+
+      if (!clickedDesktopSearch && !clickedMobileSearch) {
         setSearchOpen(false);
       }
     };
@@ -264,7 +268,7 @@ export default function Header({ hideOnScrollMobile = false }) {
             </button>
           </div>
 
-          <div className="px-5 pt-4 pb-3 border-b border-stone-100 shrink-0">
+          <div ref={mobileSearchRef} className="px-5 pt-4 pb-3 border-b border-stone-100 shrink-0">
             <form onSubmit={handleMobileSearch} className="relative">
               <input
                 type="search"

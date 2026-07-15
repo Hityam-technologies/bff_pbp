@@ -148,5 +148,3 @@ function MetaChip({ value, label, highlight = false }) {
     </span>
   );
 }
-
-export { getLowestLanding };

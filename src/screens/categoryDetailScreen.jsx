@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import ProductSheet, { getLowestLanding } from '../components/ProductSheet';
+import ProductSheet from '../components/ProductSheet';
 import CategoryPageDecor from '../components/CategoryPageDecor';
 import { getProductsByCategory } from '../data/products';
 import { getCategoryMeta, getCategoryTheme } from '../data/categoryThemes';

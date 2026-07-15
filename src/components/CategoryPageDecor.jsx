@@ -20,13 +20,13 @@ const cardPatterns = {
       <circle cx="22" cy="18" r="4" fill={doodle} opacity="0.3" />
     </>
   ),
-  'Energy Bars': ({ blob1, blob2, doodle }) => (
+  'Energy Bars': ({ blob1, doodle }) => (
     <>
       <rect x="6" y="10" width="20" height="8" rx="3" fill={blob1} opacity="0.25" transform="rotate(-8 16 14)" />
       <path d="M28,8 L31,4 L34,8 L31,12 Z" fill={doodle} opacity="0.4" />
     </>
   ),
-  'Protein Bars': ({ blob1, blob2, doodle }) => (
+  'Protein Bars': ({ blob1, doodle }) => (
     <>
       <rect x="8" y="12" width="22" height="9" rx="3" fill={blob1} opacity="0.25" />
       <circle cx="30" cy="10" r="5" fill="none" stroke={doodle} strokeWidth="1.5" opacity="0.35" />
